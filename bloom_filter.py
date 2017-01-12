@@ -1,26 +1,29 @@
 class BloomFilter(object):
-    def __init__(self):
-        self.space = [None] * 10 ** 7
+    def __init__(self, depth=3, size=10 ** 7):
+        self.depth  = depth
+        self.size   = size
+        self.space  = [None] * self.size
+
+    def _hash(self, element):
+        index = hash(element) % self.size
+
+        return index
+
 
     def add(self, element):
-        self.space[hash1(element)] = True
-        self.space[hash2(element)] = True
-        self.space[hash3(element)] = True
+        for _ in xrange(self.depth):
+            index = self._hash(element)
+            self.space[index] = True
+            element = index
 
         return True
 
     def has(self, element):
-        return (
-            self.space[hash1(element)]
-            or self.space[hash2(element)]
-            or self.space[hash3(element)]
-        )
+        for _ in xrange(self.depth):
+            index = self._hash(element)
+            if self.space[index]:
+                return True
 
-def hash1(element):
-    return hash(element) % 10 ** 7
+            element = index
 
-def hash2(element):
-    return hash(element) % 10 ** 7 + 10
-
-def hash3(element):
-    return hash(element) % 10 ** 7 + 1000
+        return False

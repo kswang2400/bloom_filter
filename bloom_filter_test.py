@@ -2,17 +2,21 @@ import unittest
 import string
 import random
 
+from . import DEPTH, SIZE, NUM_INSERT
 from .bloom_filter import BloomFilter
+
 
 class TestBloomFilter(unittest.TestCase):
     def setUp(self):
-        self.bf = BloomFilter()
-        self.test_length = 1000
+        self.bf = BloomFilter(
+            depth=DEPTH,
+            size=SIZE,
+        )
+        self.test_length = NUM_INSERT # KW: numer if inserted elements
         self.element_length = 10
 
     def test_add(self):
         assert self.bf.add(create_random_string(self.element_length))
-
 
     def test_basic_add_check(self):
         positives = []
@@ -33,6 +37,8 @@ class TestBloomFilter(unittest.TestCase):
             assert not self.bf.has(e)
 
         print "{count} negatives assertions true".format(count=len(negatives))
+
+
 
 def create_random_string(length):
     s = ''.join(
