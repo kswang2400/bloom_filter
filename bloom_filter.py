@@ -1,6 +1,9 @@
 class BloomFilter(object):
     def __init__(self):
-        self.space = {}
+        print "creating space"
+        self.space = [None] * 10 ** 7
+        print "created space"
+
 
     def add(self, element):
         self.space[hash1(element)] = True
@@ -11,16 +14,16 @@ class BloomFilter(object):
 
     def has(self, element):
         return (
-            hash1(element) in self.space
-                or hash2(element) in self.space
-                or hash3(element) in self.space
-            )
+            self.space[hash1(element)]
+            or self.space[hash2(element)]
+            or self.space[hash3(element)]
+        )
 
 def hash1(element):
-    return hash(element)
+    return hash(element) % 10 ** 7
 
 def hash2(element):
-    return hash(element) + 10
+    return hash(element) % 10 ** 7 + 10
 
 def hash3(element):
-    return hash(element) + 100
+    return hash(element) % 10 ** 7 + 1000

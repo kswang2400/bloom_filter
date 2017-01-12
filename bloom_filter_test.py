@@ -7,7 +7,7 @@ from .bloom_filter import BloomFilter
 class TestBloomFilter(unittest.TestCase):
     def setUp(self):
         self.bf = BloomFilter()
-        self.test_length = 10000
+        self.test_length = 1000
         self.element_length = 10
 
     def test_add(self):
