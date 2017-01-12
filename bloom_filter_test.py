@@ -23,7 +23,6 @@ class TestBloomFilter(unittest.TestCase):
         for _ in xrange(self.test_length):
             negatives.append(create_random_string(self.element_length))
 
-
         for e in positives:
             self.bf.add(e)
             assert self.bf.has(e)

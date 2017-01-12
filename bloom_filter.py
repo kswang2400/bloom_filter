@@ -1,9 +1,6 @@
 class BloomFilter(object):
     def __init__(self):
-        print "creating space"
         self.space = [None] * 10 ** 7
-        print "created space"
-
 
     def add(self, element):
         self.space[hash1(element)] = True
